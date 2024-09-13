@@ -17,10 +17,11 @@ model.fit(x_train, y_train)//creamos una instancia del modelo de regresion linea
 y_pred =model.predict(x_test)//se calculan las predicciones para el modelo prueba 
 r2 =model.score(x_test, y_test)//y despues obtenemos el coeficiente de determinación 
 
-coefficient = model.coef_[0]
-intercept =model.intercept_
-
-print("Linear Regression ")
+coefficient = model.coef_[0]//solicitamos el coeficiente pendiente 
+intercept =model.intercept_//extraemos el interceptó de la línea de regresión
+//ahora mostramos valores, los valores mostrados van a ser, el valor de r2, el coeficiente, el interceptó 
+y al final comparamos los valores actuales, con las predicciones realizadas por el modelo 
+print("Linear Regression ") 
 print("R2 Score:", r2)
 print("Coefficient:",coefficient)
 print("Intercept:", intercept)
@@ -29,6 +30,8 @@ print("Predicted vs Current Job Performances")
 for current, predicted in zip(y_test, y_pred):
   print(f"Current : {current:.2f}, Predicted: {predicted:.2f}")
 
+//ahora el tema es de diseño, azul los datos actuales y rojo las predicciones 
+//y obtenemos la relacion entre el numero de horas de entrenamiento y el rendimiento laboral 
 plt.scatter(x,y, color ='blue',label= 'Current Performances')
 plt.plot(x_test, y_pred, color = 'red', label= 'Predicted Performances')
 plt.xlabel('Training Hours per Week')
