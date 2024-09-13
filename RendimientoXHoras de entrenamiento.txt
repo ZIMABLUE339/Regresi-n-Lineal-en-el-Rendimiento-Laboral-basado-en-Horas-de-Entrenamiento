@@ -1,0 +1,37 @@
+import numpy as np
+from sklearn.model_selection import train_test_split 
+from sklearn.linear_model import LinearRegression 
+import matplotlib.pyplot as plt
+training_hours= np.array ([2,8,5,12,7,15,3,10,9,20,14,6,18,13,11,16,4,17,19,22,25,21,26,23,27,28,29,30])
+job_performance= np.array ([55,65,60,75,70,85,58,72,68,90,80,62,88,77,73,80,57,82,85,92,95,90,98,94,100,102,104,105])
+
+x=training_hours.reshape(-1,1)
+y=job_performance
+
+x_train, x_test, y_train, y_test = train_test_split(x,y, test_size=0.2, random_state=42)
+
+model=LinearRegression()
+model.fit(x_train, y_train)
+y_pred =model.predict(x_test)
+
+r2 =model.score(x_test, y_test)
+
+coefficient = model.coef_[0]
+intercept =model.intercept_
+
+print("Linear Regression ")
+print("R2 Score:", r2)
+print("Coefficient:",coefficient)
+print("Intercept:", intercept)
+print("Predicted vs Current Job Performances")
+
+for current, predicted in zip(y_test, y_pred):
+  print(f"Current : {current:.2f}, Predicted: {predicted:.2f}")
+
+plt.scatter(x,y, color ='blue',label= 'Current Performances')
+plt.plot(x_test, y_pred, color = 'red', label= 'Predicted Performances')
+plt.xlabel('Training Hours per Week')
+plt.ylabel('Job Performances')
+plt.title('Linear Regression: Training Hours vs Job Performances')
+plt.legend()
+plt.show()
