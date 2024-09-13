@@ -1,20 +1,21 @@
-import numpy as np
-from sklearn.model_selection import train_test_split 
-from sklearn.linear_model import LinearRegression 
-import matplotlib.pyplot as plt
+import numpy as np //para manejar arreglos y matrices 
+from sklearn.model_selection import train_test_split //este se usa para dividir los datos, en entrenamiento y prueba 
+from sklearn.linear_model import LinearRegression //porque trabajamos regresiones lineales 
+import matplotlib.pyplot as plt//para graficar los resultados 
+
+
 training_hours= np.array ([2,8,5,12,7,15,3,10,9,20,14,6,18,13,11,16,4,17,19,22,25,21,26,23,27,28,29,30])
-job_performance= np.array ([55,65,60,75,70,85,58,72,68,90,80,62,88,77,73,80,57,82,85,92,95,90,98,94,100,102,104,105])
+job_performance= np.array ([55,65,60,75,70,85,58,72,68,90,80,62,88,77,73,80,57,82,85,92,95,90,98,94,100,102,104,105])//Definimos los datos y los organizamos en matrices 
 
 x=training_hours.reshape(-1,1)
 y=job_performance
 
-x_train, x_test, y_train, y_test = train_test_split(x,y, test_size=0.2, random_state=42)
+x_train, x_test, y_train, y_test = train_test_split(x,y, test_size=0.2, random_state=42)//dividimos los datos, en este caso, 80% de los datos son de entrenamiento y el 20% es de prueba
 
 model=LinearRegression()
-model.fit(x_train, y_train)
-y_pred =model.predict(x_test)
-
-r2 =model.score(x_test, y_test)
+model.fit(x_train, y_train)//creamos una instancia del modelo de regresion lineal y la empezamos a entrenar con los datos  
+y_pred =model.predict(x_test)//se calculan las predicciones para el modelo prueba 
+r2 =model.score(x_test, y_test)//y despues obtenemos el coeficiente de determinación 
 
 coefficient = model.coef_[0]
 intercept =model.intercept_
